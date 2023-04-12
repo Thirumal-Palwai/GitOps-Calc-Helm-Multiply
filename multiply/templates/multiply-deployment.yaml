@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: multiply
+  name: multiply
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: multiply
+  template:
+    metadata:
+      labels:
+        app: multiply
+    spec:
+      containers:
+        - image: "public.ecr.aws/z8c2k6d0/multiply:{{ .Chart.AppVersion }}"
+          name: multiply
+          imagePullPolicy: IfNotPresent
+          ports:
+            - containerPort: 5000
